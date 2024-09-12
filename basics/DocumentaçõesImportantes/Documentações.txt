@@ -1,0 +1,6 @@
+https://docs.ruby-lang.org/en/3.3/String.html#class-String-label-String+Slices
+
+
+https://docs.ruby-lang.org/en/3.3/String.html
+
+http://ruby.bastardsbook.com/toc/
