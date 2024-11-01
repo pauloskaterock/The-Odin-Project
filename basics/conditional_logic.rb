@@ -151,4 +151,37 @@ else
   fml = true
 end
 ###############################################
-  
+# A menos que declarações
+# Uma unlessdeclaração funciona de forma oposta a uma ifdeclaração: ela só processa o código no bloco se a expressão for avaliada como false. Não há muito mais do que isso.
+
+age = 19
+unless age < 18
+  puts "Get a job."
+end
+
+##############################################
+# Assim como acontece com ifas instruções, você pode escrever uma unlessinstrução em uma linha e também pode adicionar uma elsecláusula.
+
+age = 19
+puts "Welcome to a life of debt." unless age < 18
+
+unless age < 18
+  puts "Down with that sort of thing."
+else
+  puts "Careful now!"
+end
+
+#############################################
+# Operador ternário
+# O operador ternário é uma instrução de uma linha if...elseque pode tornar seu código muito mais conciso.
+
+# Sua sintaxe é conditional statement ? <execute if true> : <execute if false>. Você pode atribuir o valor de retorno da expressão a uma variável.
+
+age = 19
+response = age < 18 ? "You still have your entire life ahead of you." : "You're all grown up."
+puts response #=> "You're all grown up."
+
+# Aqui, como a expressão foi avaliada como false, o código após o :foi atribuído à variável response.
+
+# Escrever isso como uma if...elsedeclaração seria muito mais prolixo:
+
