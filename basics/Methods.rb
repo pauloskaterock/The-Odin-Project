@@ -1,5 +1,5 @@
 "shit".reverse
------------------------------------------------------
+# -----------------------------------------------------
 
 Criando um METODO
 
@@ -8,7 +8,7 @@ def my_name
 end
 
 puts my_name    #=> "Joe Smith"
-------------------------------------------------------
+# ------------------------------------------------------
 Parâmetros e argumentos
 Claro, nem todos os métodos são tão básicos quanto o my_namemétodo de exemplo acima. Afinal, de que servem os métodos se você não pode interagir com eles? Quando você quer retornar algo diferente de um resultado fixo, você precisa dar parâmetros aos seus métodos. Parâmetros são variáveis ​​que seu método receberá quando for chamado. Você pode ter interações mais significativas e úteis com seus métodos usando parâmetros para torná-los mais versáteis.
 
@@ -18,7 +18,7 @@ end
 
 puts greet("John") #=> Hello, John!
 
------------------------------------------------------
+# -----------------------------------------------------
 Parâmetros padrão
 E se você nem sempre quiser fornecer argumentos para cada parâmetro que seu método aceita? É aí que os parâmetros padrão podem ser úteis. Voltando ao nosso exemplo acima, o que acontece se não soubermos o nome da pessoa? Podemos alterar nosso greetmétodo para usar um padrão namede “estranho”:
 
@@ -28,7 +28,7 @@ end
 
 puts greet("Jane") #=> Hello, Jane!
 puts greet #=> Hello, stranger!
--------------------------------------------------------
+# -------------------------------------------------------
 Como dizemos aos nossos métodos o que retornar? Vamos revisitar nosso my_namemétodo de exemplo:
 
 def my_name
