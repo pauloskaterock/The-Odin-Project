@@ -1,0 +1,254 @@
+Métodos
+Curso de Ruby
+Introdução
+Em Ruby, os métodos são onde toda a ação acontece!
+
+Você frequentemente se verá escrevendo código que faz a mesma coisa em diferentes lugares do seu programa. Não seria ótimo se houvesse uma maneira de reutilizar o mesmo código repetidamente sem ter que escrevê-lo todo a cada vez? É para isso que servem os métodos! Os métodos permitem que você nomeie seções do seu código e execute-o em qualquer lugar do programa quantas vezes precisar, apenas chamando esse nome.
+
+Este conceito permite o que os programadores chamam de abordagem DRY para programação: Não se repita . Reciclar seções de código em vez de repeti-las ao longo do programa pode torná-lo mais legível e gerenciável.
+
+À medida que você lê mais sobre métodos Ruby, notará que os termos "métodos" e "funções" são frequentemente usados de forma intercambiável. Qual é a diferença? De acordo com o livro "The Ruby Programming Language" :
+
+Muitas linguagens distinguem entre funções, que não possuem um objeto associado, e métodos, que são invocados em um objeto receptor. Como Ruby é uma linguagem puramente orientada a objetos, todos os métodos são métodos verdadeiros e estão associados a pelo menos um objeto.
+
+Basicamente, como tudo em Ruby é um objeto, Ruby só tem métodos, não funções. Com isso estabelecido, sabemos que, quando falamos de Ruby, "métodos" e "funções" se referem à mesma coisa.
+
+Nesta lição, vamos desconstruir o que são métodos, examinar seu comportamento e aprender como usá-los.
+
+Visão geral da lição
+Esta seção contém uma visão geral dos tópicos que você aprenderá nesta lição.
+
+Explique como criar e chamar um novo método.
+Explique como passar variáveis para um método e como definir parâmetros padrões.
+Descreva as diferenças entre retorno implícito e retorno explícito.
+Explique o que significa encadear métodos e como fazer isso.
+Explique o que são métodos de predicado e como usar um.
+Explique o que são métodos bang e como usar um.
+Métodos internos do Ruby
+Uma das grandes vantagens do Ruby para novos programadores é o seu grande número de métodos integrados. Você já usa muitos deles, provavelmente sem perceber. Ao longo do seu aprendizado, você modificou strings e outros objetos de diversas maneiras. Por exemplo, os laços #times e #upto que você aprendeu na lição sobre Loops são métodos incluídos na classe Integer do Ruby .
+
+Se você está curioso sobre todos os sinais de cerquilha ( #), eles são apenas a convenção para escrever métodos de instância do Ruby . Podemos usá-los para escrever o nome completo de um método de instância, por exemplo, Integer#upto, ou apenas o nome do método, por exemplo, #upto, dependendo do contexto. Observe que, no mundo do desenvolvimento, você não deve usar essas hashtags. Se quiser ser superincrível, pode chamá-las de "octothorpes" . Essa palavra está super em alta.
+
+Os métodos geralmente são chamados adicionando-os .method_nameapós uma instância do objeto que contém esse método.
+
+"anything".reverse
+Neste caso, #reverseé um método interno para objetos String .
+
+No entanto, também existem alguns métodos integrados que o Ruby torna globalmente acessíveis, como printe puts. Esses métodos são chamados apenas com o nome e os argumentos. (Se você estiver super curioso, esses métodos são disponibilizados globalmente pelo módulo Kernel por meio da classe Object , mas isso é muito mais do que você precisa saber agora.)
+
+puts "anything" #=> anything
+Vale ressaltar que, na maioria das linguagens, os argumentos são passados aos métodos envolvendo-os entre parênteses (). Em Ruby, no entanto, os parênteses geralmente são opcionais. Poderíamos reescrever o código acima como puts("anything"), que Ruby interpretaria da mesma forma.
+
+Criando um método
+Você pode criar seus próprios métodos personalizados em Ruby usando a seguinte sintaxe:
+
+def my_name
+  "Joe Smith"
+end
+
+puts my_name    #=> "Joe Smith"
+Vamos analisar esse exemplo:
+
+defé uma palavra-chave interna que informa ao Ruby que este é o início de uma definição de método.
+my_nameé o nome do seu novo método. Você pode nomear seus métodos praticamente como quiser, mas existem algumas restrições e convenções, que serão descritas na próxima seção.
+"Joe Smith"é o código dentro do corpo do método. Toda a lógica do seu método está contida nas linhas recuadas do corpo do método. Este método específico retorna uma string quando é chamado.
+endé uma palavra-chave interna que informa ao Ruby que este é o fim da definição do método.
+Para chamar o método, você precisa usar seu nome, como mostrado na última linha do exemplo.
+Nomes de métodos
+Como mencionado acima, você pode nomear seus métodos praticamente como quiser, mas não deve escolher nomes aleatoriamente. Existem certas convenções recomendadas para melhorar a legibilidade e a manutenção do seu código.
+
+Os nomes dos seus métodos podem usar números, letras maiúsculas, letras minúsculas e os caracteres especiais _, ?, !, e =. Assim como acontece com nomes de variáveis em Ruby, a convenção para nomes de métodos com múltiplas palavras é usar snake_case , separando as palavras com sublinhados.
+
+É uma boa prática começar o nome do método com uma letra minúscula, porque nomes que começam com letras maiúsculas são constantes em Ruby .
+
+Aqui estão algumas coisas que você não tem permissão para fazer com os nomes dos seus métodos:
+
+Você não pode nomear seu método com uma das aproximadamente 40 palavras reservadas do Ruby , como end, while, ou for.
+Você não pode usar nenhum símbolo além de _, ?, !, e =.
+Você não pode usar ?, !, ou =em nenhum outro lugar que não seja no final do nome.
+Não é possível começar um nome de método com um número.
+Aqui estão alguns exemplos de nomes de métodos válidos e inválidos:
+
+method_name      # valid
+_name_of_method  # valid
+1_method_name    # invalid
+method_27        # valid
+method?_name     # invalid
+method_name!     # valid
+begin            # invalid (Ruby reserved word)
+begin_count      # valid
+Você pode dizer por que alguns desses nomes são inválidos?
+
+Em geral, o nome do jogo de nomenclatura é curto, mas descritivo. Você quer ser capaz de dizer o que se espera que um método faça com base em seu nome, então, por favor, não nomeie seu método como do_stuff.
+
+Se o seu método faz tantas coisas que você sente que precisa de um nome muito longo, então ele provavelmente deveria ser dividido em vários métodos menores e mais simples. Idealmente, cada método deve fazer apenas uma coisa. Essa prática trará benefícios no futuro em termos de legibilidade, escalabilidade e manutenibilidade. (Também facilita muito o teste do seu código, o que será abordado em uma lição posterior.)
+
+Parâmetros e argumentos
+Claro, nem todos os métodos são tão básicos quanto o my_namemétodo de exemplo acima. Afinal, de que servem os métodos se você não pode interagir com eles? Quando você deseja retornar algo diferente de um resultado fixo, precisa fornecer parâmetros aos seus métodos. Parâmetros são variáveis que seu método receberá ao ser chamado. Você pode ter interações mais significativas e úteis com seus métodos usando parâmetros para torná-los mais versáteis.
+
+def greet(name)
+  "Hello, " + name + "!"
+end
+
+puts greet("John") #=> Hello, John!
+Neste exemplo, nameé um parâmetro que o greetmétodo usa para retornar uma saudação mais específica. O método foi chamado com o argumento "John", que retorna a string "Olá, John!"
+
+Se você está se perguntando quais são as diferenças entre um argumento e um parâmetro, os parâmetros atuam como variáveis de espaço reservado no modelo do seu método, enquanto os argumentos são os valores reais que são passados ao método quando ele é chamado. Portanto, no exemplo acima, nameé um parâmetro e "John"é um argumento. Os dois termos são comumente usados de forma intercambiável, portanto, não se preocupe muito com essa distinção.
+
+Parâmetros padrão
+E se você nem sempre quiser fornecer argumentos para cada parâmetro que seu método aceita? É aí que os parâmetros padrão podem ser úteis. Voltando ao nosso exemplo acima, o que acontece se não soubermos o nome da pessoa? Podemos alterar nosso greetmétodo para usar o padrão name"stranger":
+
+def greet(name = "stranger")
+  "Hello, " + name + "!"
+end
+
+puts greet("Jane") #=> Hello, Jane!
+puts greet #=> Hello, stranger!
+Quais métodos retornam
+Um detalhe importante que um programador deve aprender é entender o que seus métodos retornam . Ter uma boa compreensão do que seus métodos estão retornando é uma parte importante da depuração do seu código quando as coisas não se comportam como esperado.
+
+Como informamos aos nossos métodos o que retornar? Vamos revisitar nosso my_namemétodo de exemplo:
+
+def my_name
+  "Joe Smith"
+end
+
+puts my_name #=> "Joe Smith"
+Nosso my_namemétodo retorna "Joe Smith". Isso pode parecer óbvio, pois é a única coisa dentro do método. Na maioria das linguagens, no entanto, tal método não retornaria nada porque não possui uma instrução return explícita , que é uma instrução que começa com a returnpalavra-chave . O exemplo acima poderia ser facilmente escrito com um return explícito:
+
+def my_name
+  return "Joe Smith"
+end
+
+puts my_name #=> "Joe Smith"
+Ruby é uma das poucas linguagens que oferece retorno implícito para métodos, o que significa que um método Ruby retornará a última expressão avaliada, mesmo sem a returnpalavra-chave. A última expressão avaliada pode ou não ser a última linha do código, como você pode ver no exemplo a seguir:
+
+def even_odd(number)
+  if number % 2 == 0
+    "That is an even number."
+  else
+    "That is an odd number."
+  end
+end
+
+puts even_odd(16) #=>  That is an even number.
+puts even_odd(17) #=>  That is an odd number.
+Aqui, o retorno do método depende do resultado da ifcondição. Se o argumento for um número par, a expressão dentro da elseinstrução nunca será avaliada, então o even_oddmétodo retorna"That is an even number."
+
+Embora Ruby ofereça a facilidade de usar retornos implícitos, retornos explícitos ainda têm seu lugar no código Ruby. Um retorno explícito (usando a palavra-chave return) essencialmente diz a Ruby: "Esta é a última expressão que você deve avaliar". Este exemplo mostra como o uso returnimpede que o método continue:
+
+def my_name
+  return "Joe Smith"
+  "Jane Doe"
+end
+
+puts my_name #=> "Joe Smith"
+Por exemplo, um retorno explícito pode ser útil quando você deseja escrever um método que verifique se há erros de entrada antes de continuar.
+
+def even_odd(number)
+  unless number.is_a? Numeric
+    return "A number was not entered."
+  end
+
+  if number % 2 == 0
+    "That is an even number."
+  else
+    "That is an odd number."
+  end
+end
+
+puts even_odd(20) #=>  That is an even number.
+puts even_odd("Ruby") #=>  A number was not entered.
+Agora, tente remover o explicit returndo método acima. O método retorna o que você esperava?
+
+Diferença entre puts e return
+Uma fonte comum de confusão para novos programadores é a diferença entre putse return.
+
+putsé um método que imprime qualquer argumento que você passar para o console.
+returné a saída final de um método que você pode usar em outros lugares do seu código.
+Por exemplo, podemos escrever um método que calcula o quadrado de um número e depois putsa saída para o console.
+
+def puts_squared(number)
+  puts number * number
+end
+Este método imprime apenas o valor calculado no console, mas não retorna esse valor. Se escrevermos x = puts_squared(20), o método imprimirá 400no console, mas a variável xreceberá o valor nil. (Se precisar de uma atualização sobre isso, volte e revise a lição Entrada e Saída do Ruby.)
+
+Agora, vamos escrever o mesmo método, mas com um return implícito em vez de puts. (Usar um return explícito agirá exatamente da mesma forma neste exemplo.)
+
+def return_squared(number)
+  number * number
+end
+Quando executamos o return_squaredmétodo, ele não imprime nenhuma saída no console. Em vez disso, ele imprime returno resultado de uma forma que permite que ele seja usado no restante do seu código. Podemos salvar a saída da execução deste método em uma variável ( xno código abaixo) e usá-la de diversas maneiras. Se ainda quisermos ver o resultado do método no console, podemos usar putsessa variável para o console usando interpolação de strings.
+
+x = return_squared(20) #=> 400
+y = 100
+sum = x + y #=> 500
+
+puts "The sum of #{x} and #{y} is #{sum}."
+#=> The sum of 400 and 100 is 500.
+Métodos de encadeamento
+Uma das propriedades mágicas dos métodos que permite escrever código muito conciso é a capacidade de encadear métodos . Isso pode ser feito usando os métodos internos do Ruby ou com métodos que você cria.
+
+phrase = ["be", "to", "not", "or", "be", "to"]
+
+puts phrase.reverse.join(" ").capitalize
+#=> "To be or not to be"
+Encadear métodos dessa forma efetivamente faz com que cada chamada de método se baseie no resultado do método anterior na cadeia. O processo que ocorre essencialmente produz as seguintes etapas:
+
+["be", "to", "not", "or", "be", "to"].reverse
+= ["to", "be", "or", "not", "to", "be"].join(" ")
+= "to be or not to be".capitalize
+= "To be or not to be"
+Métodos predicados
+Às vezes, você encontrará métodos integrados do Ruby que possuem um ponto de interrogação ( ?) no final do nome, como even?, odd?, ou between?. Todos esses são métodos predicados , que é uma convenção de nomenclatura que o Ruby usa para métodos que retornam um booleano, ou seja, eles retornam trueou false.
+
+puts 5.even?  #=> false
+puts 6.even?  #=> true
+puts 17.odd?  #=> true
+
+puts 12.between?(10, 15)  #=> true
+Você também pode criar seu próprio método com um ?no final do nome para indicar que ele retorna um booleano. Ruby não impõe essa convenção de nomenclatura, mas você se agradecerá mais tarde por seguir esta diretriz.
+
+Métodos Bang
+Observe o exemplo abaixo:
+
+whisper = "HELLO EVERYBODY"
+
+puts whisper.downcase #=> "hello everybody"
+puts whisper #=> "HELLO EVERYBODY"
+O que aconteceu? Achávamos que tínhamos colocado aquela coisa em letras minúsculas! Então por que voltou a ficar tudo em letras maiúsculas quando a chamamos de novo?
+
+Quando chamamos um método em um objeto, como a whisperstring acima, o valor original desse objeto não é modificado. Uma regra geral em programação é que você não quer que seus métodos sobrescrevam os objetos para os quais você os chama. Isso evita que você sobrescreva seus dados irreversivelmente por acidente. Você pode sobrescrever seus dados reatribuindo explicitamente uma variável (como whisper = whisper.downcase). Outra maneira de fazer esse tipo de reatribuição é com métodos bang , que são denotados por um ponto de exclamação ( !) no final do nome do método.
+
+Ao adicionar um !ao final do seu método, você indica que este método executa sua ação e simultaneamente substitui o valor do objeto original pelo resultado.
+
+puts whisper.downcase! #=> "hello everybody"
+puts whisper #=> "hello everybody"
+Escrever whisper.downcase!é o equivalente a escrever whisper = whisper.downcase.
+
+Atribuição
+Para uma boa introdução a todos os diferentes conceitos relacionados a métodos, leia o capítulo sobre Métodos do livro " Introdução à Programação com Ruby" da Launch School . Não deixe de fazer os exercícios no final do capítulo também!
+Para ter uma visão diferente, leia a parte da seção Objetos que discute Métodos do livro Ruby for Beginners do Ruby Monsta .
+Para mais detalhes sobre como você pode escrever seus próprios métodos, leia a seção sobre Escrita de Métodos do livro Ruby for Beginners, do Ruby Monsta .
+Conclua os exercícios do método do repositório ruby-exercises que você clonou anteriormente.
+Verificação de conhecimento
+As perguntas a seguir são uma oportunidade para refletir sobre os principais tópicos desta lição. Se você não conseguir responder a uma pergunta, clique nela para revisar o material, mas lembre-se de que não é necessário memorizar ou dominar esse conhecimento.
+
+Como você criaria seu próprio método?
+Como você chamaria seu novo método?
+Como você passa variáveis para seu método?
+Como você define parâmetros padrão para seu método?
+Qual é a diferença entre um retorno explícito e um retorno implícito?
+Qual é a diferença entre putse return?
+Como encadear vários métodos?
+Dê um exemplo de um nome de método válido e de um nome de método inválido.
+O que é snake case?
+Quais são algumas das palavras reservadas de Ruby?
+Como se chama um método que retorna trueou false? Qual é a convenção de nomenclatura?
+O que os métodos bang fazem? Qual é a convenção de nomenclatura deles?
+Recursos adicionais
+Esta seção contém links úteis para conteúdo relacionado. Não é obrigatório, portanto, considere-o complementar.
+
+Confira o artigo Argumentos do Método Ruby no Ruby Guides para aprender sobre tipos avançados de argumentos de método, como variável, palavra-chave e opcional.
+Para uma análise mais aprofundada dos métodos, leia o capítulo "Métodos" do livro "Bastards Book of Ruby". Tente completar os exercícios ao longo do capítulo.
+Leia esta explicação no Stack Overflow sobre as diferenças sutis entre métodos e funções, e como elas podem diferir entre linguagens de programação .
