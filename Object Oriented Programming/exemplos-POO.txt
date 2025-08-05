@@ -1,0 +1,174 @@
+Aqui estão exemplos práticos de Programação Orientada a Objetos (POO) em Ruby, desde conceitos básicos até avançados, com explicações claras:
+
+1. Classe e Objeto (Básico)
+ruby
+class Carro
+  def initialize(marca, modelo)
+    @marca = marca
+    @modelo = modelo
+  end
+
+  def descricao
+    "Um #{@marca} #{@modelo}"
+  end
+end
+
+meu_carro = Carro.new("Toyota", "Corolla")
+puts meu_carro.descricao  #=> "Um Toyota Corolla"
+Conceitos:
+
+initialize: Método construtor.
+
+@marca, @modelo: Variáveis de instância (atributos).
+
+new: Cria um objeto.
+
+2. Getter e Setter (Encapsulamento)
+ruby
+class Pessoa
+  attr_accessor :nome  # Cria getter e setter automaticamente
+
+  def initialize(nome)
+    @nome = nome
+  end
+end
+
+pessoa = Pessoa.new("Ana")
+puts pessoa.nome        #=> "Ana" (getter)
+pessoa.nome = "Bruno"   # (setter)
+Alternativa manual:
+
+ruby
+def nome
+  @nome
+end
+
+def nome=(novo_nome)
+  @nome = novo_nome
+end
+3. Herança
+ruby
+class Animal
+  def comer
+    "Estou comendo!"
+  end
+end
+
+class Cachorro < Animal
+  def latir
+    "Au Au!"
+  end
+end
+
+rex = Cachorro.new
+puts rex.comer  #=> "Estou comendo!" (herdado)
+puts rex.latir  #=> "Au Au!" (método próprio)
+4. Polimorfismo e Sobrescrita
+ruby
+class Gato < Animal
+  def comer
+    "O gato está comendo ração."
+  end
+end
+
+whiskers = Gato.new
+puts whiskers.comer  #=> "O gato está comendo ração." (sobrescrita)
+5. Módulos (Mixins)
+ruby
+module Voar
+  def voar
+    "Estou voando!"
+  end
+end
+
+class Morcego
+  include Voar  # Adiciona o método 'voar' à classe
+end
+
+morcego = Morcego.new
+puts morcego.voar  #=> "Estou voando!"
+6. Classe Abstrata (Simulada)
+ruby
+class Forma
+  def area
+    raise NotImplementedError, "Método abstrato: implemente na subclasse"
+  end
+end
+
+class Circulo < Forma
+  def initialize(raio)
+    @raio = raio
+  end
+
+  def area
+    Math::PI * @raio**2
+  end
+end
+
+puts Circulo.new(5).area  #=> 78.53981633974483
+7. Singleton (Design Pattern)
+ruby
+require 'singleton'
+
+class Logger
+  include Singleton
+
+  def log(mensagem)
+    puts "[LOG] #{mensagem}"
+  end
+end
+
+Logger.instance.log("Sistema iniciado")  #=> "[LOG] Sistema iniciado"
+8. Métodos de Classe vs. Instância
+ruby
+class Contador
+  @@total = 0  # Variável de classe
+
+  def initialize
+    @@total += 1
+  end
+
+  def self.total  # Método de classe
+    @@total
+  end
+end
+
+3.times { Contador.new }
+puts Contador.total  #=> 3
+9. Comparação de Objetos (<=>)
+ruby
+class Produto
+  include Comparable  # Requer implementação do operador `<=>`
+
+  attr_reader :preco
+
+  def initialize(preco)
+    @preco = preco
+  end
+
+  def <=>(outro)
+    @preco <=> outro.preco
+  end
+end
+
+p1 = Produto.new(100)
+p2 = Produto.new(200)
+puts p1 < p2  #=> true (graças ao Comparable)
+10. Metaprogramação (Dinâmica)
+ruby
+class Dinamico
+  ["foo", "bar"].each do |metodo|
+    define_method(metodo) do
+      "Método #{metodo} criado dinamicamente!"
+    end
+  end
+end
+
+obj = Dinamico.new
+puts obj.foo  #=> "Método foo criado dinamicamente!"
+Dicas para Praticar:
+CRUD: Crie uma classe Livro com atributos (título, autor) e métodos para persistir em um array.
+
+Jogo: Modele classes como Jogador, Inimigo, e Item com interações.
+
+Banco: Simule operações bancárias com classes Conta e Cliente.
