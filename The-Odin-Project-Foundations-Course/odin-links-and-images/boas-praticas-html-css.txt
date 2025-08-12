@@ -1,0 +1,57 @@
+🏆 Boas práticas de HTML
+Usar DOCTYPE correto – Sempre <!DOCTYPE html>.
+
+Definir idioma da página – <html lang="pt-BR"> por acessibilidade e SEO.
+
+Usar indentação consistente – 2 ou 4 espaços.
+
+Fechar todas as tags – Evitar tags abertas.
+
+Usar tags semânticas – <header>, <main>, <footer>, <section>, <article>.
+
+Atributos em minúsculas – class="menu" e não Class="menu".
+
+Aspas duplas para atributos – <img src="logo.png" alt="Logo">.
+
+Texto alternativo em imagens (alt) – Importante para SEO e acessibilidade.
+
+Evitar inline CSS – Preferir arquivos externos.
+
+Evitar inline JavaScript – Separar scripts em arquivos externos.
+
+Usar meta tags importantes – charset, viewport, descrição.
+
+Evitar uso excessivo de <div> – Preferir tags semânticas.
+
+Formatação de listas e tabelas – Sempre usar <thead>, <tbody>, <th> quando necessário.
+
+Headings em ordem hierárquica – <h1> para título principal, depois <h2>, <h3>...
+
+Acessibilidade – Usar aria-label, role e labels associadas a inputs.
+
+🎨 Boas práticas de CSS
+Separar CSS do HTML – Usar arquivo externo .css.
+
+Usar seletor específico, mas não excessivamente – Evitar !important ao máximo.
+
+Organizar por seções – Comentários como /* Layout */, /* Tipografia */.
+
+Usar variáveis CSS – --primary-color: #333;.
+
+Manter consistência de unidades – Usar rem ou em para fontes, % ou vh/vw para dimensões responsivas.
+
+Usar shorthand quando possível – margin: 10px 5px; ao invés de 4 linhas.
+
+Evitar repetição – Criar classes reutilizáveis.
+
+Testar acessibilidade de contraste – Garantir legibilidade.
+
+Responsividade com media queries – @media (max-width: 768px) { ... }.
+
+Reset ou Normalize CSS – Para garantir consistência entre navegadores.
+
+Agrupar propriedades relacionadas – Manter ordem lógica: display, position, margin, padding, background, color, font.
+
+Evitar seletor universal * – A não ser para reset.
+
+Sempre testar em diferentes navegadores.
