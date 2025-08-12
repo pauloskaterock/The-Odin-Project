@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- ✅ Boas práticas HTML -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Exemplos de boas práticas HTML e CSS">
+    <title>Boas Práticas HTML & CSS</title>
+
+    <!-- ✅ CSS externo -->
+    <style>
+        /* =====================
+           🎨 Boas práticas CSS
+        ====================== */
+        
+        /* Variáveis para reutilização */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #18bc9c;
+            --font-family: Arial, sans-serif;
+        }
+
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: #f4f4f4;
+            color: var(--primary-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--secondary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            margin-top: 20px;
+        }
+
+        h1, h2 {
+            margin-bottom: 10px;
+        }
+
+        /* Classe reutilizável */
+        .btn {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #149f7f;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ✅ Uso de tags semânticas -->
+    <header>
+        <h1>Exemplos de Boas Práticas</h1>
+        <p>HTML & CSS organizados e semânticos</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Imagem com texto alternativo</h2>
+            <img src="https://via.placeholder.com/300" alt="Exemplo de imagem" width="300">
+        </section>
+
+        <section>
+            <h2>Lista semântica</h2>
+            <ul>
+                <li>Usar tags corretas</li>
+                <li>Fechar todas as tags</li>
+                <li>Manter indentação</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Botão reutilizável</h2>
+            <a href="#" class="btn">Clique Aqui</a>
+        </section>
+
+        <section>
+            <h2>Formulário com acessibilidade</h2>
+            <form>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" aria-label="Digite seu nome">
+                <button type="submit" class="btn">Enviar</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p style="text-align:center; margin-top:20px;">&copy; 2025 - Boas Práticas HTML & CSS</p>
+    </footer>
+
+</body>
+</html>
