@@ -1,0 +1,67 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+header {
+    background: red;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    
+    
+}
+
+
+
+h1 {
+    margin: 0;
+    
+    
+}
+
+h2 {
+     background: green ;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    
+}
+h3 {
+     background: orange ;
+    color: black;
+    padding: 10px 0;
+    text-align: center;
+    
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: pink;
+    color: #fff;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+code {
+    background: #0eec06;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+pre {
+    background: greenyellow;
+    padding: 10px;
+    border-radius: 4px;
+    overflow: auto;
+}
